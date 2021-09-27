@@ -22,20 +22,31 @@ Route::get('/employee/create', function () {
 });
 
 Route::get('/timecard', function () {
-    return view('timecard.select');
+    return view('timecard.index');
 });
 
 Route::get('/timecard/create', function () {
     return view('timecard.create');
 });
 
+Route::get('/sell', function () {
+    return view('sell.index');
+});
 
 Route::get('/sell/create', function () {
     return view('sell.create');
 });
 
+Route::get('/service', function () {
+    return view('service.index');
+});
+
 Route::get('/service/create', function () {
     return view('service.create');
+});
+
+Route::get('/schedule', function () {
+    return view('schedule.index');
 });
 
 Route::get('/schedule/create', function () {

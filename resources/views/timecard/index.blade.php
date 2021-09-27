@@ -10,7 +10,7 @@
             <input type="text" step="1" class="form-control" id="employee-id" placeholder="Type employee's id">
         </div>
 
-        <button class="btn bg-primary text-white"><a class="text-white text-decoration-none" href="/timecard/create">Select</a></button>
+        <a class="btn bg-primary text-white text-decoration-none" href="/timecard/create">Select</a>
     </form>
 
     <script defer>

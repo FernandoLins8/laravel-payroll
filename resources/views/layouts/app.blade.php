@@ -22,16 +22,16 @@
           <a id="timecard-page" href="/timecard" class="nav-link text-dark"><i class="bi bi-clock"></i> Timecard</a>
         </li>
         <li class="nav-item">
-          <a id="sell-page" href="#" class="nav-link text-dark"><i class="bi bi-cart"></i> Sell</a>
+          <a id="sell-page" href="/sell" class="nav-link text-dark"><i class="bi bi-cart"></i> Sell</a>
         </li>
         <li class="nav-item">
-          <a id="service-page" href="#" class="nav-link text-dark"><i class="bi bi-briefcase"></i> Service</a>
+          <a id="service-page" href="/service" class="nav-link text-dark"><i class="bi bi-briefcase"></i> Service</a>
         </li>
         <li class="nav-item">
-          <a id="payroll-page" href="#" class="nav-link text-dark"><i class="bi bi-wallet2"></i> Payroll</a>
+          <a id="schedule-page" href="/schedule" class="nav-link text-dark"><i class="bi bi-calendar"></i> Schedules</a>
         </li>
         <li class="nav-item">
-          <a id="schedule-page" href="#" class="nav-link text-dark"><i class="bi bi-calendar"></i> Schedules</a>
+          <a id="payroll-page" href="/payroll" class="nav-link text-dark"><i class="bi bi-wallet2"></i> Payroll</a>
         </li>
       </ul>
     </nav>

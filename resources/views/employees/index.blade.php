@@ -6,7 +6,7 @@
         <h3>Employees</h3>
     
         <table class="table my-3 table-hover">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
@@ -44,7 +44,7 @@
             </tbody>
         </table>
     
-        <button class="btn bg-primary"><a class="text-white text-decoration-none" href="/employee/create">Add new</a></button>
+        <a class="btn bg-primary text-white text-decoration-none" href="/employee/create">Add new</a>
     </div>
 
     <script defer>

@@ -20,9 +20,9 @@
             <label for="payment_method" class="form-label">Payment Method</label>
             <select id="payment_method" class="form-select">
                 <option selected hidden disabled>Choose employee's payment method</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="Check-sent-by-mail">Check sent by mail</option>
+                <option value="Check-given-in-person">Check given in person</option>
+                <option value="Bank-account-deposit">Bank account deposit</option>
             </select>
         </div>
 
@@ -51,14 +51,13 @@
             </div>
         </div>
 
-
         <div class="mb-4">
             <label for="employee-type" class="form-label">Employee Type</label>
             <select id="employee-type" class="form-select">
                 <option selected hidden disabled>Select employee's type</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="Salaried">Salaried</option>
+                <option value="Commissioned">Commissioned</option>
+                <option value="Hourly">Hourly</option>
             </select>
         </div>
 
@@ -81,9 +80,9 @@
             <label for="hourly-salary" class="form-label">Hourly Salary</label>
             <input type="number" step="0.01" class="form-control" id="hourly-salary" placeholder="Type employee's salary per hour">
         </div>
-    </form>
 
-    <button class="btn bg-primary text-white">Save</button>
+        <button class="btn bg-primary text-white">Save</button>
+    </form>
 
     <script defer>
         // Change selected link navbar
@@ -114,16 +113,16 @@
             hiddenSections.forEach(section => {
                 section.classList.add('d-none')
             })
-            
-            if(value === '1') {
+
+            if(value === 'Salaried') {
                 const salariedSection = document.querySelector('.salaried-section')
                 salariedSection.classList.remove('d-none')
-            } else if(value === '2') {
+            } else if(value === 'Commissioned') {
                 const commissionedSections = document.querySelectorAll('.commissioned-section')
                 commissionedSections.forEach(section => {
                     section.classList.remove('d-none')
                 })
-            } else if(value === '3') {
+            } else if(value === 'Hourly') {
                 const hourlySection = document.querySelector('.hourly-section')
                 hourlySection.classList.remove('d-none')
             }

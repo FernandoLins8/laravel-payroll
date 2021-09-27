@@ -13,6 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/employee', function () {
+    return view('employees.index');
+});
+
+Route::get('/employee/create', function () {
+    return view('employees.create');
+});
+
+Route::get('/timecard', function () {
+    return view('timecard.select');
+});
+
+Route::get('/timecard/create', function () {
+    return view('timecard.create');
+});
+
+
+Route::get('/sell/create', function () {
+    return view('sell.create');
+});
+
+Route::get('/service/create', function () {
+    return view('service.create');
+});
+
+Route::get('/schedule/create', function () {
+    return view('schedule.create');
 });

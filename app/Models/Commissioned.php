@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Commissioned extends Model
 {
     use HasFactory;
+    protected $table = 'commissioned';
 }

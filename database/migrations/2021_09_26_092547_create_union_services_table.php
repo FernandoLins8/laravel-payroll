@@ -19,7 +19,13 @@ class CreateUnionServicesTable extends Migration
             $table->decimal('tax', $total = 8, $places = 2);
             $table->date('date');
             $table->foreignUuid('union_id');
-            $table->foreign('union_id')->references('id')->on('union_registrations');
+            
+            $table->foreign('union_id')
+            ->references('id')
+            ->on('union_registrations')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

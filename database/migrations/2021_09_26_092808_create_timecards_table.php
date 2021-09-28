@@ -15,9 +15,14 @@ class CreateTimecardsTable extends Migration
     {
         Schema::create('timecards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees');
             $table->date('date');
             $table->decimal('working_hours', $total = 3, $places = 1, $unsigned = true);
+
+            $table->foreignId('employee_id')
+            ->constrained('hourly', 'employee_id')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

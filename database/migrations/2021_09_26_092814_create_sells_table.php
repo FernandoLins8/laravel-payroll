@@ -15,9 +15,13 @@ class CreateSellsTable extends Migration
     {
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees');
             $table->string('description');
             $table->decimal('value', $total = 8, $places = 2, $unsigned = true);
+            $table->foreignId('employee_id')
+            ->constrained('commissioned', 'employee_id')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

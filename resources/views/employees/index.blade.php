@@ -8,41 +8,32 @@
         <table class="table my-3 table-hover">
             <thead class="table-dark">
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Type</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Type</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark Otto</td>
-                <td>St Main aux, Maceio/AL</td>
-                <td>Salaried</td>
-                <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
-                <td><button class="btn bg-danger text-white py-1 px-3">Delete</button></td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob Thornton</td>
-                <td>Av teste, Maceio/AL</td>
-                <td>Commissioned</td>
-                <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
-                <td><button class="btn bg-danger text-white py-1 px-3">Delete</button></td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>Random Street n° 42</td>
-                <td>Hourly</td>
-                <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
-                <td><button class="btn bg-danger text-white py-1 px-3">Delete</button></td>
-                </tr>
+                @foreach($employees as $employee)
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>{{ $employee->name }}</td>
+                    <td>{{ $employee->address }}</td>
+                    <td>{{ $employee->type }}</td>
+                    <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
+                    <form method="post" action="{{ route('destroy', $employee->id) }}">
+                        @csrf
+                        @method('delete')
+                        <td><button class="btn bg-danger text-white py-1 px-3">Delete</button></td>
+                    </form>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
+
     
         <a class="btn bg-primary text-white text-decoration-none" href="/employee/create">Add new</a>
     </div>
@@ -57,11 +48,11 @@
 
         // 
         // Delete employee checkout
-        function removeEmployee() {
-            const choice = confirm('Do you want to remove the employee?')
+        function removeEmployee(e) {
+            const removeEmp = confirm('Are you sure?')
 
-            if(choice) {
-                alert('Employee removed')
+            if(!removeEmp) {
+                e.preventDefault()
             }
         }
         

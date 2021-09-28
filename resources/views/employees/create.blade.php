@@ -3,26 +3,27 @@
 @section('content')
     <h3>Employees</h3>
 
-    <form action="">
+    <form method="post" action="{{ route('store-employee') }}">
+        @csrf
         <h4>Create new Employee</h4>
         
         <div class="mb-4">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Type employee's name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Type employee's name">
         </div>
         
         <div class="mb-4">
             <label for="address" class="form-label">Address</label>
-            <textarea class="form-control" id="address" rows="3" placeholder="Type employee's address"></textarea>
+            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Type employee's address"></textarea>
         </div>
 
         <div class="mb-4">
-            <label for="payment_method" class="form-label">Payment Method</label>
-            <select id="payment_method" class="form-select">
+            <label for="payment-method-id" class="form-label">Payment Method</label>
+            <select id="payment-method-id" name="payment-method-id" class="form-select">
                 <option selected hidden disabled>Choose employee's payment method</option>
-                <option value="Check-sent-by-mail">Check sent by mail</option>
-                <option value="Check-given-in-person">Check given in person</option>
-                <option value="Bank-account-deposit">Bank account deposit</option>
+                @foreach($paymentMethods as $method)
+                    <option value="{{ $method->id }}">{{ $method->description }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -30,13 +31,13 @@
             <div class="mb-4">
                 <label name="union" for="union">Employee affiliated with union?</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="union" id="not-at-union" checked>
+                    <input class="form-check-input" type="radio" name="union" id="not-at-union" value="false" checked>
                     <label class="form-check-label" for="not-at-union">
                         Not affiliated
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="union" id="at-union">
+                    <input class="form-check-input" type="radio" name="union" id="at-union" value="true">
                     <label class="form-check-label" for="at-union">
                         Affiliated
                     </label>
@@ -46,42 +47,42 @@
             <div class="mx-auto">
                 <div class="mb-4">
                     <label for="union-tax" class="form-label">Union tax</label>
-                    <input type="text" class="form-control" id="union-tax" placeholder="0.00" disabled>
+                    <input type="text" class="form-control" name="union-tax" id="union-tax" placeholder="0.00" disabled>
                 </div>
             </div>
         </div>
 
         <div class="mb-4">
-            <label for="employee-type" class="form-label">Employee Type</label>
-            <select id="employee-type" class="form-select">
+            <label for="employee-type-id" class="form-label">Employee Type</label>
+            <select id="employee-type-id" name="employee-type-id" class="form-select">
                 <option selected hidden disabled>Select employee's type</option>
-                <option value="Salaried">Salaried</option>
-                <option value="Commissioned">Commissioned</option>
-                <option value="Hourly">Hourly</option>
+                @foreach($employeeTypes as $type)
+                    <option value="{{ $type->id }}">{{ $type->description }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="d-none salaried-section hidden-section mb-4">
             <label for="salary" class="form-label">Salary</label>
-            <input type="number" step="0.01" class="form-control" id="salary" placeholder="Type employee's Salary">
+            <input type="number" step="0.01" class="form-control" id="salary" name="salary" placeholder="Type employee's Salary">
         </div>
 
         <div class="d-none commissioned-section hidden-section mb-4">
             <label for="base-salary" class="form-label">Base Salary</label>
-            <input type="number" step="0.01" class="form-control" id="base-salary" placeholder="Type employee's base salary">
+            <input type="number" step="0.01" class="form-control" id="base-salary" name="base-salary" placeholder="Type employee's base salary">
         </div>
 
         <div class="d-none commissioned-section hidden-section mb-4">
             <label for="commission-tax" class="form-label">Commission Tax</label>
-            <input type="number" step="0.01" class="form-control" id="commission-tax" placeholder="Type employee's commission per sell">
+            <input type="number" step="0.01" class="form-control" id="commission-tax" name="commission-tax" placeholder="Type employee's commission per sell">
         </div>
 
         <div class="d-none hourly-section hidden-section mb-4">
             <label for="hourly-salary" class="form-label">Hourly Salary</label>
-            <input type="number" step="0.01" class="form-control" id="hourly-salary" placeholder="Type employee's salary per hour">
+            <input type="number" step="0.01" class="form-control" id="hourly-salary" name="hourly-salary" placeholder="Type employee's salary per hour">
         </div>
 
-        <button class="btn bg-primary text-white">Save</button>
+        <button type="submit" class="btn bg-primary text-white">Save</button>
     </form>
 
     <script defer>
@@ -108,27 +109,32 @@
         // Toggle employee type section
         function showEmployeeTypeSection(e) {
             const value = e.target.value
+            const salariedValue = '1' 
+            const commissionedValue = '2' 
+            const hourlyValue = '3'
 
             const hiddenSections = document.querySelectorAll('.hidden-section')
             hiddenSections.forEach(section => {
                 section.classList.add('d-none')
             })
 
-            if(value === 'Salaried') {
+            if(value === salariedValue) {
                 const salariedSection = document.querySelector('.salaried-section')
                 salariedSection.classList.remove('d-none')
-            } else if(value === 'Commissioned') {
+
+            } else if(value === commissionedValue) {
                 const commissionedSections = document.querySelectorAll('.commissioned-section')
                 commissionedSections.forEach(section => {
                     section.classList.remove('d-none')
                 })
-            } else if(value === 'Hourly') {
+
+            } else if(value === hourlyValue) {
                 const hourlySection = document.querySelector('.hourly-section')
                 hourlySection.classList.remove('d-none')
             }
         }
         
-        const employeeTypeSelect = document.querySelector('#employee-type')
+        const employeeTypeSelect = document.querySelector('#employee-type-id')
         employeeTypeSelect.addEventListener('change', showEmployeeTypeSection)
     </script>
 @endsection

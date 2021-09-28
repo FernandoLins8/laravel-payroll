@@ -14,7 +14,12 @@ class CreateHourlyTable extends Migration
     public function up()
     {
         Schema::create('hourly', function (Blueprint $table) {
-            $table->foreignId('employee_id')->constrained('employees')->primary();
+            $table->foreignId('employee_id')
+            ->constrained('employees')
+            ->primary()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->decimal('hourly_salary', $total = 6, $places = 2, $unsigned = true);
             $table->timestamps();
         });

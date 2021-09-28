@@ -14,7 +14,12 @@ class CreateCommissionedTable extends Migration
     public function up()
     {
         Schema::create('commissioned', function (Blueprint $table) {
-            $table->foreignId('employee_id')->constrained('employees')->primary();
+            $table->foreignId('employee_id')
+            ->constrained('employees')
+            ->primary()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->decimal('base_salary', $total = 12, $places = 2, $unsigned = true);
             $table->decimal('commission_tax', $total = 3, $places = 2, $unsigned = true);
             $table->timestamps();

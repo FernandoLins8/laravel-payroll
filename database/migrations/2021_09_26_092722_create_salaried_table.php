@@ -14,7 +14,12 @@ class CreateSalariedTable extends Migration
     public function up()
     {
         Schema::create('salaried', function (Blueprint $table) {
-            $table->foreignId('employee_id')->constrained('employees')->primary();
+            $table->foreignId('employee_id')
+            ->constrained('employees')
+            ->primary()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+      
             $table->decimal('salary', $total = 12, $places = 2, $unsigned = true);
             $table->timestamps();
         });

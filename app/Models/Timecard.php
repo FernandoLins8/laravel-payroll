@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Timecard extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'date',
+        'working_hours',
+        'employee_id'
+    ];
 }

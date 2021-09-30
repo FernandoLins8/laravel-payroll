@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TimecardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,18 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// Employee
 Route::get('/employee', [EmployeeController::class, 'index']);
 Route::get('/employee/create', [EmployeeController::class, 'create']);
 Route::post('/employee/create', [EmployeeController::class, 'store'])->name('store-employee');
 Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'])->name('destroy');
 
-Route::get('/timecard', function () {
-    return view('timecard.index');
-});
-
-Route::get('/timecard/create', function () {
-    return view('timecard.create');
-});
+// Timecard
+Route::get('/timecard', [TimecardController::class, 'index']);
+Route::post('/timecard/create', [TimecardController::class, 'create'])->name('create-timecard');
+Route::post('/timecard/save', [TimecardController::class, 'store'])->name('store-timecard');
 
 Route::get('/sell', function () {
     return view('sell.index');

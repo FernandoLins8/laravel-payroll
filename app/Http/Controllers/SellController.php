@@ -25,8 +25,8 @@ class SellController extends Controller
      */
     public function create(Request $request)
     {
-        $teste = request('employee-id');
-        $employee = Employee::where('id', $teste)->first();
+        $id = request('employee-id');
+        $employee = Employee::where('id', $id)->first();
 
         // 2 = commissioned type of employee
         if(!$employee || $employee->employee_type_id !== 2) {

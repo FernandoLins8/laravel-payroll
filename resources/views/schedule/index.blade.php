@@ -10,26 +10,30 @@
             <thead class="table-dark">
                 <tr>
                 <th scope="col">Schedule</th>
+                <th scope="col">Assigned</th>
                 <th scope="col">Active</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>Monthly $</td>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
-                </td>
-                </tr>
-                <tr>
-                <td>Jacob Thornton</td>
-                <td>Av teste, Maceio/AL</td>
-                </tr>
-                <tr>
-                <td>Larry the Bird</td>
-                <td>Random Street n° 42</td>
-                </tr>
+                @foreach($schedules as $schedule)
+                    <tr>
+                        <td>{{ $schedule->description }}</td>
+                        <td>1</td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        @if($schedule->id > 3)
+                            <form method="post" action="{{ route('destroy-schedule', $schedule->id) }}">
+                                @csrf
+                                @method('delete')
+                                <td><button type="submit" class="btn bg-danger text-white py-1 px-3">Delete</button></td>
+                            </form>
+                        @endif
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     
@@ -44,6 +48,22 @@
         })
         const currentLink = document.querySelector('#schedule-page')
         currentLink.classList.remove('text-dark')
+
+
+        // 
+        // Delete schedule checkout
+        function removeSchedule(e) {
+            const removeSchedule = confirm('Are you sure?')
+
+            if(!removeSchedule) {
+                e.preventDefault()
+            }
+        }
+        
+        const deleteButtons = document.querySelectorAll('.bg-danger')
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', removeSchedule)
+        })
     </script>
 @endsection
 

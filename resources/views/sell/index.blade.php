@@ -3,14 +3,16 @@
 @section('content')
     <h3>Sell</h3>
 
-    <form action="">
+    <form method="post" action="{{ route('create-sell') }}">
+        @csrf
+        
         <h4 class="py-2">Register Employee's Sell</h4>
         <div class="mb-4">
             <label for="employee-id" class="form-label">Employee Id</label>
-            <input type="text" step="1" class="form-control" id="employee-id" placeholder="Type employee's id">
+            <input type="text" step="1" class="form-control" name="employee-id" id="employee-id" placeholder="Type employee's id">
         </div>
 
-        <a class="btn bg-primary text-white text-decoration-none" href="/sell/create">Select</a>
+        <button type="submit" class="btn bg-primary text-white text-decoration-none">Select</button>
     </form>
 
     <script defer>

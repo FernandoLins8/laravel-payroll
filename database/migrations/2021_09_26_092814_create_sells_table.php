@@ -17,6 +17,7 @@ class CreateSellsTable extends Migration
             $table->id();
             $table->string('description');
             $table->decimal('value', $total = 8, $places = 2, $unsigned = true);
+            $table->date('date');
             $table->foreignId('employee_id')
             ->constrained('commissioned', 'employee_id')
             ->onUpdate('cascade')

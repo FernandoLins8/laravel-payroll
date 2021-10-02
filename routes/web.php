@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SellController;
 use App\Http\Controllers\TimecardController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,13 +28,10 @@ Route::get('/timecard', [TimecardController::class, 'index']);
 Route::post('/timecard/create', [TimecardController::class, 'create'])->name('create-timecard');
 Route::post('/timecard/save', [TimecardController::class, 'store'])->name('store-timecard');
 
-Route::get('/sell', function () {
-    return view('sell.index');
-});
-
-Route::get('/sell/create', function () {
-    return view('sell.create');
-});
+// Sell
+Route::get('/sell', [SellController::class, 'index']);
+Route::post('/sell/create', [SellController::class, 'create'])->name('create-sell');
+Route::post('/sell/save', [SellController::class, 'store'])->name('store-sell');
 
 Route::get('/service', function () {
     return view('service.index');

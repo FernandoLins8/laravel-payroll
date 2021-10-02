@@ -2,30 +2,31 @@
 
 @section('content')
     <h3>Sell</h3>
-
-    <form action="">
+    
+    <form method="post" action="{{ route('store-sell') }}">
+        @csrf
         <h4 class="py-2">Register Employee's Sell</h4>
         <div class="mb-4">
             <label for="employee-id" class="form-label">Employee Id</label>
-            <input type="number" step="1" class="form-control" id="employee-id" value="1" disabled>
+            <input type="number" step="1" class="form-control" name="employee-id" id="employee-id" value="{{ $employee->id }}" readonly>
         </div>
 
         <div class="mb-4">
             <label for="employee-name" class="form-label">Employee Name</label>
-            <input type="text" class="form-control" id="employee-name" value="John Doe" disabled> 
+            <input type="ext" class="form-control" id="employee-name" value="{{ $employee->name }}" disabled> 
         </div>
 
         <div class="mb-4">
-            <label for="product-description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="product-description" placeholder="Product description">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Product description">
         </div>
 
         <div class="mb-4">
-            <label for="product-value" class="form-label">Value</label>
-            <input type="number" step="0.01" class="form-control" id="product-value" placeholder="Product value"> 
+            <label for="value" class="form-label">Value</label>
+            <input type="number" step="0.01" class="form-control" name="value" id="value" placeholder="Product value"> 
         </div>
         
-        <button class="btn bg-primary text-white">Add timecard</button>
+        <button class="btn bg-primary text-white">Add Sell</button>
     </form>
 
 

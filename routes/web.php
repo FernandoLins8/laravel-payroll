@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\SellController;
-use App\Http\Controllers\TimecardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TimecardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +34,10 @@ Route::get('/sell', [SellController::class, 'index']);
 Route::post('/sell/create', [SellController::class, 'create'])->name('create-sell');
 Route::post('/sell/save', [SellController::class, 'store'])->name('store-sell');
 
-Route::get('/service', function () {
-    return view('service.index');
-});
-
-Route::get('/service/create', function () {
-    return view('service.create');
-});
+// Service
+Route::get('/service', [ServiceController::class, 'index']);
+Route::post('/service/create', [ServiceController::class, 'create'])->name('create-service');
+Route::post('/service/save', [ServiceController::class, 'store'])->name('store-service');
 
 Route::get('/schedule', function () {
     return view('schedule.index');

@@ -15,7 +15,7 @@ class CreateUnionRegistrationsTable extends Migration
     public function up()
     {
         Schema::create('union_registrations', function (Blueprint $table) {
-            $table->uuid('id')->default(Str::uuid())->primary();
+            $table->uuid('id')->primary();
             $table->decimal('union_tax', $precision = 3, $scale = 2, $unsigned = true);
             $table->timestamps();
         });

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commissioned;
-use App\Models\Employee;
-use App\Models\EmployeeType;
-use App\Models\Hourly;
-use App\Models\PaymentMethod;
-use App\Models\Salaried;
-use App\Models\UnionRegistration;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Hourly;
+use App\Models\Employee;
+use App\Models\Salaried;
+use Illuminate\Support\Str;
+use App\Models\Commissioned;
+use App\Models\EmployeeType;
+use App\Models\PaymentMethod;
+use App\Models\UnionRegistration;
+
 
 class EmployeeController extends Controller
 {
@@ -74,6 +76,7 @@ class EmployeeController extends Controller
         $unionFiliated = request('union');
         if($unionFiliated === "true") {
             $union = UnionRegistration::create([
+                'id' => Str::uuid(),
                 'union_tax' => request('union-tax')
             ]);
             $unionId = $union->id;

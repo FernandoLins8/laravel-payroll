@@ -31,6 +31,7 @@ class TimecardController extends Controller
         $id = request('employee-id');
         $employee = Employee::where('id', $id)->first();
 
+        // 3 = hourly type of employee
         if(!$employee || $employee->employee_type_id !== 3) {
             return view('layouts.not_found');
         }

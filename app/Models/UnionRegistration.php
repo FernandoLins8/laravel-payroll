@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UnionRegistration extends Model
 {
     use HasFactory;
+    public $incrementing = false;
     protected $fillable = ['id', 'union_tax'];
 }

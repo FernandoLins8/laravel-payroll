@@ -19,7 +19,7 @@
             <tbody>
                 @foreach($employees as $employee)
                     <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{ $employee->id }}</th>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->address }}</td>
                     <td>{{ $employee->type }}</td>

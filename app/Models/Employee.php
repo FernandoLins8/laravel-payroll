@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\EmployeeType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
@@ -16,4 +17,10 @@ class Employee extends Model
         'schedule_id',
         'union_id',
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(EmployeeType::class, 'employee_type_id');
+    }
+
 }

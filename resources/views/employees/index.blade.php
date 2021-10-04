@@ -10,7 +10,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Address</th>
                     <th scope="col">Type</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -21,8 +20,7 @@
                     <tr>
                     <th scope="row">{{ $employee->id }}</th>
                     <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->address }}</td>
-                    <td>{{ $employee->type }}</td>
+                    <td>{{ $employee->type->description }}</td>
                     <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
                     <form method="post" action="{{ route('destroy', $employee->id) }}">
                         @csrf

@@ -39,14 +39,6 @@
     </div>
 
     <script defer>
-        const navbarLinks = document.querySelectorAll('#navbar ul li a')
-        navbarLinks.forEach(item => {
-            item.classList.add('text-dark')
-        })
-        const currentLink = document.querySelector('#employees-page')
-        currentLink.classList.remove('text-dark')
-
-        // 
         // Delete employee checkout
         function removeEmployee(e) {
             const removeEmp = confirm('Are you sure?')
@@ -60,7 +52,6 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', removeEmployee)
         })
-
     </script>
 @endsection
 

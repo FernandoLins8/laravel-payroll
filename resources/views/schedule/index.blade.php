@@ -77,19 +77,7 @@
     <br>
     <a class="btn bg-primary text-white text-decoration-none" href="/schedule/create">Add new</a>
 </div>
-
-
     <script defer>
-        // Change selected link navbar
-        const navbarLinks = document.querySelectorAll('#navbar ul li a')
-        navbarLinks.forEach(item => {
-            item.classList.add('text-dark')
-        })
-        const currentLink = document.querySelector('#schedule-page')
-        currentLink.classList.remove('text-dark')
-
-
-        // 
         // Delete schedule checkout
         function removeSchedule(e) {
             const removeSchedule = confirm('Are you sure?')

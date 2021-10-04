@@ -14,15 +14,5 @@
 
         <button class="btn bg-primary text-white text-decoration-none">Select</button>
     </form>
-
-    <script defer>
-        // Change selected link navbar
-        const navbarLinks = document.querySelectorAll('#navbar ul li a')
-        navbarLinks.forEach(item => {
-            item.classList.add('text-dark')
-        })
-        const currentLink = document.querySelector('#timecard-page')
-        currentLink.classList.remove('text-dark')
-    </script>
 @endsection
 

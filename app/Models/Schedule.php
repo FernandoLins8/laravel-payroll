@@ -9,6 +9,7 @@ class Schedule extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description'
+        'description',
+        'type'
     ];
 }

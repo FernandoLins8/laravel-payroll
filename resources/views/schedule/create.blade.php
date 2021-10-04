@@ -31,7 +31,6 @@
                     @for ($day = 1; $day < 31; $day++)
                         <option value="{{ $day }}">{{ $day }}</option>
                     @endfor
-                    <option value="$">$</option>
                 </select>
             </div>
         </div>
@@ -76,7 +75,7 @@
         navbarLinks.forEach(item => {
             item.classList.add('text-dark')
         })
-        const currentLink = document.querySelector('#service-page')
+        const currentLink = document.querySelector('#schedule-page')
         currentLink.classList.remove('text-dark')
 
         // toggle hidden section

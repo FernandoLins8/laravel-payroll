@@ -15,9 +15,9 @@ class ScheduleSeeder extends Seeder
     public function run()
     {
         DB::table('schedules')->insert([
-            ['description' => 'monthly $'], 
-            ['description' => 'weekly 2 Friday',], 
-            ['description' => 'weekly 4 Friday']
+            ['description' => 'monthly $', 'type' => 'monthly'],
+            ['description' => 'weekly 2 Friday', 'type' => 'weekly'],
+            ['description' => 'weekly 4 Friday', 'type' => 'weekly']
         ]);
     }
 }

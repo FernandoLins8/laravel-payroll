@@ -47,7 +47,8 @@ class ScheduleController extends Controller
             }
             
             Schedule::create([
-                'description' => "monthly $day"
+                'description' => "monthly $day",
+                'type' => 'monthly'
             ]);
 
         } else {
@@ -59,7 +60,8 @@ class ScheduleController extends Controller
             }
             
             Schedule::create([
-                'description' => "weekly $frequency $weekday"
+                'description' => "weekly $frequency $weekday",
+                'type' => 'weekly'
             ]);
         }
         

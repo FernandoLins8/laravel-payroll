@@ -2,43 +2,82 @@
 
 @section('content')
 <div class="w-100">
-        
-        <h3>Schedules</h3>
-        <h4 class="mt-5">Monthly schedules</h4>
-    
-        <table class="table my-3 table-hover">
-            <thead class="table-dark">
+    <h3>Schedules</h3>
+
+    <h4 class="mt-2">Default schedules</h4>
+    <table class="w-75 table my-3 table-hover">
+        <thead class="table-dark">
+            <tr>
+            <th class="w-50" scope="col">Schedule</th>
+            <th class="w-50" scope="col">Assigned to</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for($i = 0; $i < 3; $i++)
                 <tr>
-                <th scope="col">Schedule</th>
-                <th scope="col">Assigned</th>
-                <th scope="col">Active</th>
-                <th scope="col"></th>
+                    <td>{{ $schedules[$i]->description }}</td>
+                    <td>1</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($schedules as $schedule)
+            @endfor
+        </tbody>
+    </table>
+
+    <h4 class="mt-5">Weekly schedules</h4>
+    <table class="w-75 table my-3 table-hover">
+        <thead class="table-dark">
+            <tr>
+            <th class="w-50" scope="col">Schedule</th>
+            <th class="w-25" scope="col">Assigned to</th>
+            <th class="w-25 text-center" scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($schedules as $schedule)
+                @if($schedule->type === 'weekly' && $schedule->id > 3)
                     <tr>
                         <td>{{ $schedule->description }}</td>
                         <td>1</td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        @if($schedule->id > 3)
-                            <form method="post" action="{{ route('destroy-schedule', $schedule->id) }}">
-                                @csrf
-                                @method('delete')
-                                <td><button type="submit" class="btn bg-danger text-white py-1 px-3">Delete</button></td>
-                            </form>
-                        @endif
+                        <form method="post" action="{{ route('destroy-schedule', $schedule->id) }}">
+                            @csrf
+                            @method('delete')
+                            <td><button type="submit" class="btn bg-danger text-white py-1 px-3">Delete</button></td>
+                        </form>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    
-        <a class="btn bg-primary text-white text-decoration-none" href="/schedule/create">Add new</a>
-    </div>
+                @endif
+            @endforeach
+        </tbody>
+    </table>    
+
+    <h4 class="mt-5">Monthly schedules</h4>
+    <table class="w-75 table my-3 table-hover">
+        <thead class="table-dark">
+            <tr>
+            <th class="w-50" scope="col">Schedule</th>
+            <th class="w-25" scope="col">Assigned to</th>
+            <th class="w-25 text-center" scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($schedules as $schedule)
+                @if($schedule->type === 'monthly' && $schedule->id > 3)
+                    <tr>
+                        <td>{{ $schedule->description }}</td>
+                        <td>1</td>
+                        <form method="post" action="{{ route('destroy-schedule', $schedule->id) }}">
+                            @csrf
+                            @method('delete')
+                            <td><button type="submit" class="btn bg-danger text-white py-1 px-3">Delete</button></td>
+                        </form>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>    
+
+    <br>
+    <a class="btn bg-primary text-white text-decoration-none" href="/schedule/create">Add new</a>
+</div>
+
 
     <script defer>
         // Change selected link navbar

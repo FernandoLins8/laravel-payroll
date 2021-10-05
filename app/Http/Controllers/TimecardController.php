@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Hourly;
 use App\Models\Timecard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -16,7 +16,8 @@ class TimecardController extends Controller
      */
     public function index()
     {
-        return view('timecard.index');
+        $hourlyEmployees = Hourly::all();
+        return view('timecard.index', ['hourlyEmployees' => $hourlyEmployees]);
     }
 
     /**
@@ -29,15 +30,14 @@ class TimecardController extends Controller
     public function create(Request $request)
     {
         $id = request('employee-id');
-        $employee = Employee::where('id', $id)->first();
+        $hourly = Hourly::where('employee_id', $id)->first();
 
-        // 3 = hourly type of employee
-        if(!$employee || $employee->employee_type_id !== 3) {
+        if(!$hourly) {
             return view('layouts.not_found');
         }
         
         return view('timecard.create', [
-            'employee' => $employee
+            'employee' => $hourly->employee
         ]);
     }
 
@@ -51,7 +51,7 @@ class TimecardController extends Controller
     {
         $employeeId = request('employee-id');
         $workingHours = request('working-hours');
-        $date = Carbon::now()->toDateString(); 
+        $date = request('date'); 
 
         Timecard::create([
             'date' => $date,
@@ -59,6 +59,6 @@ class TimecardController extends Controller
             'employee_id' => $employeeId
         ]);
 
-        return view('timecard.index');
+        return redirect('/timecard');
     }
 }

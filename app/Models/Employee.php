@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\EmployeeType;
+use App\Models\UnionRegistration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,5 +23,4 @@ class Employee extends Model
     {
         return $this->belongsTo(EmployeeType::class, 'employee_type_id');
     }
-
 }

@@ -16,7 +16,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('service.index');
+        $employees = Employee::whereNotNull('union_id')->get();
+        return view('service.index', ['employees' => $employees]);
     }
 
     /**

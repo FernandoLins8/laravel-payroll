@@ -9,9 +9,14 @@
         <h4 class="py-2">Register a service brought by an employee</h4>
         <div class="mb-4">
             <label for="employee-id" class="form-label">Employee Id</label>
-            <input type="text" step="1" class="form-control" name="employee-id" id="employee-id" placeholder="Type employee's id">
+            <select class="form-select w-50" name="employee-id" id="employee-id">
+                <option hidden selected disabled>Select an employee from union</option>
+                @foreach($employees as $employee)
+                    <option value="{{ $employee->id }}">{{ $employee->id }} | {{ $employee->name }}</option>
+                @endforeach
+            </select>
         </div>
-
+        
         <button type="submit" class="btn bg-primary text-white text-decoration-none">Select</button>
     </form>
 @endsection

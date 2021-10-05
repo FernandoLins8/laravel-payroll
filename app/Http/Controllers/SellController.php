@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Commissioned;
 use App\Models\Sell;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,8 @@ class SellController extends Controller
      */
     public function index()
     {
-        return view('sell.index');
+        $employees =  Commissioned::all();
+        return view('sell.index', ['employees' => $employees]);
     }
 
     /**
@@ -26,14 +27,13 @@ class SellController extends Controller
     public function create(Request $request)
     {
         $id = request('employee-id');
-        $employee = Employee::where('id', $id)->first();
+        $commissioned = Commissioned::where('employee_id', $id)->first();
 
-        // 2 = commissioned type of employee
-        if(!$employee || $employee->employee_type_id !== 2) {
+        if(!$commissioned) {
             return view('layouts.not_found');
         }
 
-        return view('sell.create', ['employee' => $employee]);
+        return view('sell.create', ['employee' => $commissioned->employee]);
     }
 
     /**
@@ -48,7 +48,7 @@ class SellController extends Controller
             'employee_id' => request('employee-id'),
             'description' => request('description'),
             'value' => request('value'),
-            'date' => date("Y-m-d")
+            'date' => request('date')
         ]);
 
         return redirect('/sell');

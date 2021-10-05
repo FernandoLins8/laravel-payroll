@@ -9,7 +9,7 @@
 
         <div class="mb-4">
             <select class="form-select w-50" name="employee-id" id="employee-id">
-                <option disabled selected>Select an hourly employee</option>
+                <option hidden disabled selected>Select an hourly employee</option>
             @foreach($hourlyEmployees as $hourly)
                 <option value="{{ $hourly->employee_id }}">{{ $hourly->employee_id }} | {{ $hourly->employee->name }}</option>
             @endforeach

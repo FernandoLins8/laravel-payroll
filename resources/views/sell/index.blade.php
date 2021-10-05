@@ -9,7 +9,12 @@
         <h4 class="py-2">Register Employee's Sell</h4>
         <div class="mb-4">
             <label for="employee-id" class="form-label">Employee Id</label>
-            <input type="text" step="1" class="form-control" name="employee-id" id="employee-id" placeholder="Type employee's id">
+            <select class="form-select w-50" name="employee-id" id="employee-id">
+                <option hidden selected disabled value="">Select an commissioned employee</option>
+                @foreach($employees as $commissioned)
+                    <option value="{{ $commissioned->employee_id }}">{{ $commissioned->employee_id }} | {{ $commissioned->employee->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <button type="submit" class="btn bg-primary text-white text-decoration-none">Select</button>

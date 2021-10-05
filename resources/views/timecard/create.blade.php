@@ -23,7 +23,7 @@
         </div>
         
         <div class="mb-4">
-            <label for="working-hours" class="form-label">Date</label>
+            <label for="date" class="form-label">Date</label>
             <input type="date" class="form-control w-25" name="date" id="date" placeholder="Type the date">
         </div>
         

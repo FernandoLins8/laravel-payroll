@@ -7,17 +7,17 @@
         @csrf
         <h4>Create new Employee</h4>
         
-        <div class="mb-4">
+        <div class="mb-4 w-75">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Type employee's name">
         </div>
         
-        <div class="mb-4">
+        <div class="mb-4 w-75">
             <label for="address" class="form-label">Address</label>
             <textarea class="form-control" id="address" name="address" rows="3" placeholder="Type employee's address"></textarea>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 w-50">
             <label for="payment-method-id" class="form-label">Payment Method</label>
             <select id="payment-method-id" name="payment-method-id" class="form-select">
                 <option selected hidden disabled>Choose employee's payment method</option>
@@ -27,7 +27,7 @@
             </select>
         </div>
 
-        <div class="d-flex justify-content-start">
+        <div class="w-75 d-flex justify-content-start">
             <div class="mb-4">
                 <label name="union" for="union">Employee affiliated with union?</label>
                 <div class="form-check">
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 w-25">
             <label for="employee-type-id" class="form-label">Employee Type</label>
             <select id="employee-type-id" name="employee-type-id" class="form-select">
                 <option selected hidden disabled>Select employee's type</option>
@@ -62,22 +62,22 @@
             </select>
         </div>
 
-        <div class="d-none salaried-section hidden-section mb-4">
+        <div class="w-50 d-none salaried-section hidden-section mb-4">
             <label for="salary" class="form-label">Salary</label>
             <input type="number" step="0.01" class="form-control" id="salary" name="salary" placeholder="Type employee's Salary">
         </div>
 
-        <div class="d-none commissioned-section hidden-section mb-4">
+        <div class="w-50 d-none commissioned-section hidden-section mb-4">
             <label for="base-salary" class="form-label">Base Salary</label>
             <input type="number" step="0.01" class="form-control" id="base-salary" name="base-salary" placeholder="Type employee's base salary">
         </div>
 
-        <div class="d-none commissioned-section hidden-section mb-4">
+        <div class="w-50 d-none commissioned-section hidden-section mb-4">
             <label for="commission-tax" class="form-label">Commission Tax</label>
             <input type="number" step="0.01" class="form-control" id="commission-tax" name="commission-tax" placeholder="Type employee's commission per sell">
         </div>
 
-        <div class="d-none hourly-section hidden-section mb-4">
+        <div class="w-50 d-none hourly-section hidden-section mb-4">
             <label for="hourly-salary" class="form-label">Hourly Salary</label>
             <input type="number" step="0.01" class="form-control" id="hourly-salary" name="hourly-salary" placeholder="Type employee's salary per hour">
         </div>

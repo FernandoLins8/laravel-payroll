@@ -6,6 +6,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TimecardController;
+use App\Models\Employee;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,11 @@ use App\Http\Controllers\TimecardController;
 
 // Employee
 Route::get('/employee', [EmployeeController::class, 'index']);
-Route::get('/employee/create', [EmployeeController::class, 'create']);
+Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('show-employee');
+Route::get('/employee/create', [EmployeeController::class, 'create'])->name('create-employee');
 Route::post('/employee/create', [EmployeeController::class, 'store'])->name('store-employee');
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit'])->name('edit-employee');
+Route::put('/employee/update/{id}', [EmployeeController::class, 'update'])->name('update-employee');
 Route::delete('/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('destroy');
 
 // Timecard

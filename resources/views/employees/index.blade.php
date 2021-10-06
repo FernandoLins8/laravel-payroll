@@ -21,11 +21,11 @@
                     <th scope="row">{{ $employee->id }}</th>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->type->description }}</td>
-                    <td><button class="btn bg-info text-white py-1 px-3">Details</button></td>
+                    <td><a class="btn btn-info text-white py-1 px-3" href="{{ route('show-employee', $employee->id) }}">Details</a></td>
                     <form method="post" action="{{ route('destroy', $employee->id) }}">
                         @csrf
                         @method('delete')
-                        <td><button class="btn bg-danger text-white py-1 px-3">Delete</button></td>
+                        <td><button class="btn btn-danger text-white py-1 px-3">Delete</button></td>
                     </form>
                     </tr>
                 @endforeach
@@ -33,7 +33,7 @@
         </table>
 
     
-        <a class="btn bg-primary text-white text-decoration-none" href="/employee/create">Add new</a>
+        <a class="btn btn-primary text-white text-decoration-none" href="{{ route('create-employee') }}">Add new</a>
     </div>
 
     <script defer>

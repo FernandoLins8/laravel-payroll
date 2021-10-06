@@ -16,23 +16,59 @@
       <ul class="nav vh-100 p-5 flex-column bg-white">
         <h1 class="h3 pt-3 p-3 border-bottom text-center">Payroll</h1>
         <li class="nav-item">
-          <a id="employees-page" href="/employee" class="{{ Request::path() ==  'employee' ? 'nav-link' : 'nav-link text-dark'  }}"><i class="bi bi-person"></i> Employees</a>
+          <a 
+            id="employees-page" 
+            href="/employee"
+            class="{{ str_starts_with(Request::path(), 'employee') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-person"></i> Employees</a>
         </li>
+
         <li class="nav-item">
-          <a id="timecard-page" href="/timecard" class="{{ Request::path() ==  'timecard' ? 'nav-link' : 'nav-link text-dark'  }}" class="nav-link "><i class="bi bi-clock"></i> Timecard</a>
+          <a 
+            id="timecard-page" 
+            href="/timecard"
+            class="{{ str_starts_with(Request::path(), 'timecard') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-clock"></i> Timecard</a>
         </li>
+
         <li class="nav-item">
-          <a id="sell-page" href="/sell" class="{{ Request::path() ==  'sell' ? 'nav-link' : 'nav-link text-dark'  }}"><i class="bi bi-cart"></i> Sell</a>
+          <a 
+            id="sell-page" 
+            href="/sell"
+            class="{{ str_starts_with(Request::path(), 'sell') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-cart"></i> Sell</a>
         </li>
+
         <li class="nav-item">
-          <a id="service-page" href="/service" class="{{ Request::path() ==  'service' ? 'nav-link' : 'nav-link text-dark'  }}"><i class="bi bi-briefcase"></i> Service</a>
+          <a 
+            id="service-page" 
+            href="/service"
+            class="{{ str_starts_with(Request::path(), 'service') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-briefcase"></i> Service</a>
         </li>
+
         <li class="nav-item">
-          <a id="schedule-page" href="/schedule" class="{{ Request::path() ==  'schedule' ? 'nav-link' : 'nav-link text-dark'  }}"><i class="bi bi-calendar"></i> Schedules</a>
+          <a 
+            id="schedule-page" 
+            href="/schedule"
+            class="{{ str_starts_with(Request::path(), 'schedule') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-calendar"></i> Schedules</a>
         </li>
+
         <li class="nav-item">
-          <a id="payroll-page" href="/payroll" class="{{ Request::path() ==  'payroll' ? 'nav-link' : 'nav-link text-dark'  }}"><i class="bi bi-wallet2"></i> Payroll</a>
+          <a 
+            id="payroll-page" 
+            href="/payroll"
+            class="{{ str_starts_with(Request::path(), 'payroll') ? 'nav-link' : 'nav-link text-dark' }}"
+          >
+            <i class="bi bi-wallet2"></i> Payroll</a>
         </li>
+
       </ul>
     </nav>
 

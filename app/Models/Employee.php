@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Hourly;
+use App\Models\Salaried;
+use App\Models\Commissioned;
 use App\Models\EmployeeType;
 use App\Models\UnionRegistration;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,8 +23,27 @@ class Employee extends Model
         'union_id',
     ];
 
-    public function type()
-    {
+    public function type() {
         return $this->belongsTo(EmployeeType::class, 'employee_type_id');
+    }
+
+    public function payment_method() {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
+    }
+    
+    public function salaried() {
+        return $this->hasOne(Salaried::class);
+    }
+
+    public function commissioned() {
+        return $this->hasOne(Commissioned::class);
+    }
+
+    public function hourly() {
+        return $this->hasOne(Hourly::class);
+    }
+
+    public function union() {
+        return $this->belongsTo(UnionRegistration::class, 'union_id');
     }
 }

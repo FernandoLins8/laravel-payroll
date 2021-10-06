@@ -115,7 +115,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        return view('employees.show', ['employee' => $employee]);
     }
 
     /**
@@ -126,7 +127,15 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        $paymentMethods = PaymentMethod::all();
+        $employeeTypes = EmployeeType::all();
+        
+        return view('employees.edit', [
+            'employee' => $employee,
+            'paymentMethods' => $paymentMethods,
+            'employeeTypes' => $employeeTypes
+        ]);
     }
 
     /**
@@ -138,7 +147,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+
+        $employee->name = request('name');
+        $employee->address = request('address');
+        $employee->payment_method_id = request('payment-method');
+        $employee->save();
+
+        return redirect('/employee');
     }
 
     /**

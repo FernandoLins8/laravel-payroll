@@ -12,7 +12,6 @@ use App\Models\UnionRegistration;
 use App\Http\Requests\StoreEmployeeRequest;
 
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -79,7 +78,7 @@ class EmployeeController extends Controller
         $unionId = null;
 
         if($unionFiliated === "true") {
-            $unionId = Str::uuid()->toString();
+            $unionId = request('union-id');
             UnionRegistration::create([
                 'id' => $unionId,
                 'union_tax' => request('union-tax')
@@ -149,15 +148,82 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreEmployeeRequest $request, $id)
     {
         $employee = Employee::where('id', $id)->first();
 
         $employee->name = request('name');
         $employee->address = request('address');
-        $employee->payment_method_id = request('payment-method');
-        $employee->save();
+        $employee->payment_method_id = request('payment-method-id');
+        
+        $employeeTypeSent = request('employee-type');
+        if($employee->type->description !== $employeeTypeSent) {
+            if($employee->type->description === 'Salaried') {
+                $employee->salaried()->delete();
+            } else if($employee->type->description === 'Commissioned') {
+                $employee->commissioned()->delete();
+            } else if($employee->type->description === 'Hourly') {
+                $employee->salaried()->delete();
+            }
+            if($employeeTypeSent === 'Salaried') {
+                $salaried = new Salaried();
+                $salaried->salary = request('salary');
+                $salaried->employee_id = $employee->id;
+                $salaried->save();
+                $schedule = 1;
+                $employee->salaried()->save($salaried);
 
+            } else if($employeeTypeSent === 'Commissioned') {
+                $commissioned = new Commissioned();
+                $commissioned->base_salary = request('base-salary');
+                $commissioned->commission_tax = request('commission-tax');
+                $commissioned->employee_id = $employee->id;
+                $commissioned->save();
+                $schedule = 2;
+                $employee->commissioned()->save($commissioned);
+
+            } else if($employeeTypeSent === 'Hourly') {
+                $hourly = new Hourly();
+                $hourly->hourly_salary = request('hourly-salary');
+                $hourly->employee_id = $employee->id;
+                $hourly->save();
+                $schedule = 3;
+                $employee->hourly()->save($hourly);
+            }
+
+            $newEmployeeType = EmployeeType::where('description', $employeeTypeSent)->first()->id;
+            $employee->employee_type_id = $newEmployeeType;
+            $employee->schedule_id = $schedule;
+        }
+
+        $unionFiliatedSent = request('union');
+        $unionTax = request('union-tax');
+        $unionId = request('union-id');
+        if($employee->union) {
+            $employee->union->union_tax = $unionTax;
+            $employee->union->id = $unionId;
+        }
+        
+        // Two cases:
+        // employee first not on union and affiliates
+        if(!$employee->union_id && $unionFiliatedSent === 'true') {
+            $unionId = $unionId ? $unionId : Str::uuid()->toString();
+            $union = UnionRegistration::create([
+                'id' => $unionId,
+                'union_tax' => $unionTax
+            ]);
+            $employee->union()->associate($union);
+        }
+
+        // employee first affiliated and leaves
+        if($employee->union && $unionFiliatedSent === 'false') {
+            $unionRegistration = $employee->union;
+            $employee->union()->dissociate();
+            $employee->save();
+            $unionRegistration->delete();
+        }
+        
+        $employee->save();
         return redirect('/employee');
     }
 

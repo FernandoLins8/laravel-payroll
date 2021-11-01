@@ -29,23 +29,6 @@
         <input type="text" id="type" class="form-control" readonly value="{{ $employee->type->description }}">
     </div>
 
-    @if($employee->union_id)
-        <div class="mb-4 w-75">
-            <label for="union-id" class="form-label">Union Id</label>
-            <input type="text" id="union-id" class="form-control" readonly value="{{ $employee->union_id }}">
-        </div>
-
-        <div class="mb-4 w-75">
-            <label for="union-tax" class="form-label">Union Tax</label>
-            <input type="text" id="union-tax" class="form-control" readonly value="{{ $employee->union->union_tax }}">
-        </div>
-    @else
-        <div class="mb-4 w-75">
-            <label for="union" class="form-label">Union</label>
-            <input type="text" id="union" class="form-control" readonly value="Employee is not a union member">
-        </div>
-    @endif
-
     @if($employee->type->description === 'Salaried')
         <div class="mb-4 w-75">
             <label for="salary" class="form-label">Salary</label>
@@ -72,5 +55,22 @@
         </div>
     @endif
 
+    @if($employee->union_id)
+        <div class="mb-4 w-75">
+            <label for="union-id" class="form-label">Union Id</label>
+            <input type="text" id="union-id" class="form-control" readonly value="{{ $employee->union_id }}">
+        </div>
+
+        <div class="mb-4 w-75">
+            <label for="union-tax" class="form-label">Union Tax</label>
+            <input type="text" id="union-tax" class="form-control" readonly value="{{ $employee->union->union_tax }}">
+        </div>
+    @else
+        <div class="mb-4 w-75">
+            <label for="union" class="form-label">Union</label>
+            <input type="text" id="union" class="form-control" readonly value="Employee is not a union member">
+        </div>
+    @endif
+    
     <a href="{{ route('edit-employee', $employee->id) }}" class="btn btn-primary text-white">Editar</a>
 @endsection

@@ -64,6 +64,20 @@
             </div>
         </div>
 
+        <div class="w-50 mb-4">
+        <label for="union-id" class="form-label">Union Id</label>
+        <input 
+            class="form-control"
+            type="text"
+            id="union-id"
+            name="union-id"
+            disabled
+        >
+            @error('union-id')
+                <div class="text-danger p-1">{{ $message }}</div>
+            @enderror
+        </div>
+
         <div class="mb-4 w-25">
             <label for="employee-type" class="form-label">Employee Type</label>
             <select id="employee-type" name="employee-type" class="form-select">
@@ -116,7 +130,7 @@
         <button type="submit" class="btn bg-primary text-white">Save</button>
     </form>
 
-    <script src="{{ URL::asset('js/toggleUnionTax.js') }}" defer></script>
+    <script src="{{ URL::asset('js/toggleUnion.js') }}" defer></script>
     <script src="{{ URL::asset('js/toggleEmployeeType.js') }}" defer></script>
 @endsection
 

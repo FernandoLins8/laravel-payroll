@@ -33,6 +33,7 @@ class StoreEmployeeRequest extends FormRequest
             'commission-tax' => 'exclude_unless:employee-type,Commissioned|required',
             'hourly-salary' => 'exclude_unless:employee-type,Hourly|required',
             'union-tax' => 'exclude_unless:union,true|required',
+            'union-id' => 'exclude_unless:union,true|required',
         ];
     }
 
@@ -51,6 +52,7 @@ class StoreEmployeeRequest extends FormRequest
             'commission-tax.required' => 'Commission tax is required',
             'hourly-salary.required' => 'Hourly salary is required',
             'union-tax.required' => 'Union tax is required',
+            'union-id.required' => 'Union Id is required',
         ];
     }
 }

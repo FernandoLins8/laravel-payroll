@@ -55,7 +55,7 @@
             <div class="mx-auto">
                 <div class="mb-4">
                     <label for="union-tax" class="form-label">Union tax</label>
-                    <input type="text" class="form-control" name="union-tax" id="union-tax" placeholder="0.00" value="0.00" disabled>
+                    <input type="text" class="form-control" name="union-tax" id="union-tax" value="0.00" disabled>
 
                     @error('union-tax')
                         <div class="text-danger p-1">{{ $message }}</div>
@@ -116,46 +116,7 @@
         <button type="submit" class="btn bg-primary text-white">Save</button>
     </form>
 
-    <script defer>
-        // toggle union tax
-        // 
-        const radioButtons = document.querySelectorAll('input[name=union]')
-        radioButtons.forEach(button => {
-            button.addEventListener('change', toggleUnionTax)
-        })
-        
-        function toggleUnionTax() {
-            const unionTax = document.querySelector('#union-tax')
-            unionTax.disabled = !unionTax.disabled
-        }
-
-        // Toggle employee type section
-        function showEmployeeTypeSection(e) {
-            const value = e.target.value
-
-            const hiddenSections = document.querySelectorAll('.hidden-section')
-            hiddenSections.forEach(section => {
-                section.classList.add('d-none')
-            })
-
-            if(value === 'Salaried' ) {
-                const salariedSection = document.querySelector('.salaried-section')
-                salariedSection.classList.remove('d-none')
-
-            } else if(value === 'Commissioned') {
-                const commissionedSections = document.querySelectorAll('.commissioned-section')
-                commissionedSections.forEach(section => {
-                    section.classList.remove('d-none')
-                })
-
-            } else if(value === 'Hourly') {
-                const hourlySection = document.querySelector('.hourly-section')
-                hourlySection.classList.remove('d-none')
-            }
-        }
-        
-        const employeeTypeSelect = document.querySelector('#employee-type')
-        employeeTypeSelect.addEventListener('change', showEmployeeTypeSection)
-    </script>
+    <script src="{{ URL::asset('js/toggleUnionTax.js') }}" defer></script>
+    <script src="{{ URL::asset('js/toggleEmployeeType.js') }}" defer></script>
 @endsection
 

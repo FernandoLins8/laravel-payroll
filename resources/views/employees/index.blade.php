@@ -46,7 +46,7 @@
             }
         }
         
-        const deleteButtons = document.querySelectorAll('.bg-danger')
+        const deleteButtons = document.querySelectorAll('.btn-danger')
         deleteButtons.forEach(button => {
             button.addEventListener('click', removeEmployee)
         })

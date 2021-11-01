@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Hourly;
 use App\Models\Employee;
 use App\Models\Salaried;
-use Illuminate\Support\Str;
 use App\Models\Commissioned;
 use App\Models\EmployeeType;
-use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use App\Models\UnionRegistration;
+use App\Http\Requests\StoreEmployeeRequest;
+
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -50,23 +52,25 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        $employeeTypeId = request('employee-type-id');
+        $employeeType = request('employee-type');
+        $employeeTypeId = EmployeeType::where('description', $employeeType)->first()->id;
+
         $salaried = new Salaried();
         $commissioned = new Commissioned();
         $hourly = new Hourly();
 
-        if($employeeTypeId === '1')
+        if($employeeType === 'Salaried')
         {
             $schedule = 1;
             $salaried->salary = request('salary');
-        } else if($employeeTypeId === '2')
+        } else if($employeeType === 'Commissioned')
         {
             $schedule = 2;
             $commissioned->base_salary = request('base-salary');
             $commissioned->commission_tax = request('commission-tax');
-        } else if($employeeTypeId === '3') {
+        } else if($employeeType === 'Hourly') {
             $schedule = 3;
             $hourly->hourly_salary = request('hourly-salary');
         }
@@ -91,15 +95,15 @@ class EmployeeController extends Controller
             'union_id' => $unionId
         ]);
 
-        if($employeeTypeId === '1')
+        if($employeeType === 'Salaried')
         {
             $salaried->employee_id = $employee->id;
             $salaried->save();
-        } else if($employeeTypeId === '2')
+        } else if($employeeType === 'Commissioned')
         {
             $commissioned->employee_id = $employee->id;
             $commissioned->save();
-        } else if($employeeTypeId === '3') {
+        } else if($employeeType === 'Hourly') {
             $hourly->employee_id = $employee->id;
             $hourly->save();
         }

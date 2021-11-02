@@ -13,4 +13,8 @@ class Timecard extends Model
         'working_hours',
         'employee_id'
     ];
+
+    public function hourly() {
+        return $this->belongsTo(Hourly::class, 'employee_id', 'employee_id');
+    }
 }

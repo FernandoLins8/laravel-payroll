@@ -19,6 +19,9 @@ use App\Models\Employee;
 |
 */
 
+Route::get('/', function() {
+  return redirect()->route('list-employees');
+});
 
 // Employee
 Route::get('/employee', [EmployeeController::class, 'index'])->name('list-employees');

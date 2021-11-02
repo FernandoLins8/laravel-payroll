@@ -3,20 +3,25 @@
 @section('content')
     <h3>Timecard</h3>
 
-    <form method="post" action="{{ route('create-timecard') }}">
-        @csrf
-        <h4 class="py-2">Add timecard for today's date</h4>
-
-        <div class="mb-4">
-            <select class="form-select w-50" name="employee-id" id="employee-id">
-                <option hidden disabled selected>Select an hourly employee</option>
+    <table class="table w-75 my-3 table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach($hourlyEmployees as $hourly)
-                <option value="{{ $hourly->employee_id }}">{{ $hourly->employee_id }} | {{ $hourly->employee->name }}</option>
+            <tr>
+                <td>{{ $hourly->employee_id }}</td>
+                <td>{{ $hourly->employee->name }}</td>
+                <td>
+                    <a class="btn btn-info text-white py-1 px-3" href="{{ route('list-by-employee', ['id' => $hourly->employee_id]) }}">Select</a>
+                </td>
+            </tr>
             @endforeach
-            </select>
-        </div>
-
-        <button class="btn bg-primary text-white text-decoration-none">Select</button>
-    </form>
+        </tbody>
+    </table>
 @endsection
 

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hourly;
+use App\Models\Employee;
 use App\Models\Timecard;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 class TimecardController extends Controller
 {
@@ -19,17 +20,12 @@ class TimecardController extends Controller
         $hourlyEmployees = Hourly::all();
         return view('timecard.index', ['hourlyEmployees' => $hourlyEmployees]);
     }
-
+    
     /**
-     * Show the form for creating a new resource / redirect
-     * in case no employee was found
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * List Timcards by Employee
      */
-    public function create(Request $request)
+    public function listByEmployee($id)
     {
-        $id = request('employee-id');
         $hourly = Hourly::where('employee_id', $id)->first();
 
         if(!$hourly) {
@@ -59,6 +55,21 @@ class TimecardController extends Controller
             'employee_id' => $employeeId
         ]);
 
-        return redirect('/timecard');
+        return redirect()->route(
+            'list-by-employee',
+            $employeeId
+        );
+    }
+
+    public function destroy($id) {
+        $timecard = Timecard::where('id', $id)->first();
+        $employeeId = $timecard->employee_id;
+
+        $timecard->delete();
+
+        return redirect()->route(
+            'list-by-employee', 
+            $employeeId
+        );
     }
 }

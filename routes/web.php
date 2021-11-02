@@ -21,7 +21,7 @@ use App\Models\Employee;
 
 
 // Employee
-Route::get('/employee', [EmployeeController::class, 'index']);
+Route::get('/employee', [EmployeeController::class, 'index'])->name('list-employees');
 Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('show-employee');
 Route::get('/employee/create', [EmployeeController::class, 'create'])->name('create-employee');
 Route::post('/employee/create', [EmployeeController::class, 'store'])->name('store-employee');
@@ -31,8 +31,9 @@ Route::delete('/employee/delete/{id}', [EmployeeController::class, 'destroy'])->
 
 // Timecard
 Route::get('/timecard', [TimecardController::class, 'index']);
-Route::post('/timecard/create', [TimecardController::class, 'create'])->name('create-timecard');
+Route::get('/timecard/employee/{id}', [TimecardController::class, 'listByEmployee'])->name('list-by-employee');
 Route::post('/timecard/save', [TimecardController::class, 'store'])->name('store-timecard');
+Route::delete('/timecard/delete/{id}', [TimecardController::class, 'destroy'])->name('destroy-timecard');
 
 // Sell
 Route::get('/sell', [SellController::class, 'index']);

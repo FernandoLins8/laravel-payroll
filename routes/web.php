@@ -46,8 +46,9 @@ Route::delete('/sell/delete/{id}', [SellController::class, 'destroy'])->name('de
 
 // Service
 Route::get('/service', [ServiceController::class, 'index']);
-Route::post('/service/create', [ServiceController::class, 'create'])->name('create-service');
+Route::get('/service/employee/{id}', [ServiceController::class, 'listByEmployee'])->name('list-services-by-employee');
 Route::post('/service/save', [ServiceController::class, 'store'])->name('store-service');
+Route::delete('/service/delete/{id}', [ServiceController::class, 'destroy'])->name('destroy-service');
 
 // Schedule
 Route::get('/schedule', [ScheduleController::class, 'index']);

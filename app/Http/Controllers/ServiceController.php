@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Employee;
+use App\Models\UnionRegistration;
 use App\Models\UnionService;
 
 class ServiceController extends Controller
@@ -25,14 +26,13 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function listByEmployee($id)
     {
-        $id = request('employee-id');
         $employee = Employee::where('id', $id)->first();
 
         if(!$employee->union_id) {
             return view('layouts.not_found');
-        } 
+        }
 
         return view('service.create', ['employee' => $employee]);
     }
@@ -45,6 +45,8 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        $employeeId = request('employee-id');
+        
         UnionService::create([
             'union_id' => request('union-id'),
             'description' => request('description'),
@@ -52,6 +54,21 @@ class ServiceController extends Controller
             'date' => date('Y-m-d')
         ]);
 
-        return redirect('/service');
+        return redirect()->route(
+            'list-services-by-employee',
+            $employeeId
+        );
+    }
+
+    public function destroy($id) {
+        $service = UnionService::where('id', $id)->first();
+        $union = UnionRegistration::where('id', $service->union_id)->first();
+
+        $service->delete();
+
+        return redirect()->route(
+            'list-services-by-employee',
+            $union->employee->id
+        );
     }
 }

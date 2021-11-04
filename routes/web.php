@@ -40,8 +40,9 @@ Route::delete('/timecard/delete/{id}', [TimecardController::class, 'destroy'])->
 
 // Sell
 Route::get('/sell', [SellController::class, 'index']);
-Route::post('/sell/create', [SellController::class, 'create'])->name('create-sell');
+Route::get('/sell/employee/{id}', [SellController::class, 'listByEmployee'])->name('list-sells-by-employee');
 Route::post('/sell/save', [SellController::class, 'store'])->name('store-sell');
+Route::delete('/sell/delete/{id}', [SellController::class, 'destroy'])->name('destroy-sell');
 
 // Service
 Route::get('/service', [ServiceController::class, 'index']);

@@ -19,14 +19,10 @@ class SellController extends Controller
         return view('sell.index', ['employees' => $employees]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    
+    //  List sells by employee.
+    public function listByEmployee($id)
     {
-        $id = request('employee-id');
         $commissioned = Commissioned::where('employee_id', $id)->first();
 
         if(!$commissioned) {
@@ -44,13 +40,30 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
+        $employeeId = request('employee-id');
+        
         Sell::create([
-            'employee_id' => request('employee-id'),
+            'employee_id' => $employeeId,
             'description' => request('description'),
             'value' => request('value'),
             'date' => request('date')
         ]);
 
-        return redirect('/sell');
+        return redirect()->route(
+            'list-sells-by-employee',
+            $employeeId
+        );
+    }
+
+    public function destroy($id) {
+        $sell = Sell::where('id', $id)->first();
+        $employeeId = $sell->employee_id;
+        
+        $sell->delete();
+
+        return redirect()->route(
+            'list-sells-by-employee',
+            $employeeId
+        );
     }
 }

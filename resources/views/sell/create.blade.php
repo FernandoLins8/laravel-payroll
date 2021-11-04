@@ -73,14 +73,4 @@
     </table>
 
     <br>
-
-    <script defer>
-        // Change selected link navbar
-        const navbarLinks = document.querySelectorAll('#navbar ul li a')
-        navbarLinks.forEach(item => {
-            item.classList.add('text-dark')
-        })
-        const currentLink = document.querySelector('#sell-page')
-        currentLink.classList.remove('text-dark')
-    </script>
 @endsection

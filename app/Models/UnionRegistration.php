@@ -12,10 +12,10 @@ class UnionRegistration extends Model
     protected $fillable = ['id', 'union_tax'];
 
     public function employee() {
-        return $this->hasOne(Employee::class, 'union_id', 'id');
+        return $this->hasOne(Employee::class);
     }
     
     public function services() {
-        return $this->hasMany(UnionService::class, 'union_id', 'id');
+        return $this->hasMany(UnionService::class, 'union_id');
     }
 }

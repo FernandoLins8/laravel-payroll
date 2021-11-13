@@ -202,6 +202,7 @@ class EmployeeController extends Controller
         if($employee->union) {
             $employee->union->union_tax = $unionTax;
             $employee->union->id = $unionId;
+            $employee->union->save();
         }
         
         // Two cases:

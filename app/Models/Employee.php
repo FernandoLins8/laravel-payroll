@@ -30,7 +30,7 @@ class Employee extends Model
     public function payment_method() {
         return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }
-    
+
     public function salaried() {
         return $this->hasOne(Salaried::class);
     }
@@ -44,6 +44,6 @@ class Employee extends Model
     }
 
     public function union() {
-        return $this->belongsTo(UnionRegistration::class, 'union_id');
+        return $this->belongsTo(UnionRegistration::class);
     }
 }

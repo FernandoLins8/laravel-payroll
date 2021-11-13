@@ -18,7 +18,7 @@
             <tbody>
                 @foreach($employees as $employee)
                     <tr>
-                    <th scope="row">{{ $employee->id }}</th>
+                    <td scope="row">{{ $employee->id }}</td>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->type->description }}</td>
                     <td><a class="btn btn-info text-white py-1 px-3" href="{{ route('show-employee', $employee->id) }}">Details</a></td>

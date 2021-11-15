@@ -17,7 +17,7 @@ class TimecardController extends Controller
      */
     public function index()
     {
-        $hourlyEmployees = Hourly::all();
+        $hourlyEmployees = Hourly::with('employee')->get();
         return view('timecard.index', ['hourlyEmployees' => $hourlyEmployees]);
     }
     
@@ -33,6 +33,7 @@ class TimecardController extends Controller
         }
         
         return view('timecard.create', [
+            'hourly' => $hourly,
             'employee' => $hourly->employee
         ]);
     }

@@ -54,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($employee->commissioned->sells->sortByDesc('date') as $sell)
+            @foreach($commissioned->sells->sortByDesc('date') as $sell)
                 <tr>
                     <td>{{ $sell->id }}</td>
                     <td>{{ $sell->description }}</td>

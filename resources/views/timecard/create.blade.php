@@ -47,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($employee->hourly->timecards->sortByDesc('date') as $timecard)
+        @foreach($hourly->timecards->sortByDesc('date') as $timecard)
             <tr>
             <th scope="row">{{ $timecard->id }}</th>
             <td>{{ $timecard->date }}</td>

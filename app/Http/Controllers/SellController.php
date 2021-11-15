@@ -15,7 +15,7 @@ class SellController extends Controller
      */
     public function index()
     {
-        $employees =  Commissioned::all();
+        $employees =  Commissioned::with('employee')->get();
         return view('sell.index', ['employees' => $employees]);
     }
 
@@ -29,7 +29,10 @@ class SellController extends Controller
             return view('layouts.not_found');
         }
 
-        return view('sell.create', ['employee' => $commissioned->employee]);
+        return view('sell.create', [
+            'commissioned' =>$commissioned,
+            'employee' => $commissioned->employee
+        ]);
     }
 
     /**
